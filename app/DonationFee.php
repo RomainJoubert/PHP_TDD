@@ -13,12 +13,20 @@ class DonationFee
 {
 
     private $donation;
-    private $commissionPercentage;
+    public $commissionPercentage;
+
+    /**
+     * @return mixed
+     */
 
     public function __construct($donation, $commissionPercentage)
     {
         $this->donation = $donation;
         $this->commissionPercentage = $commissionPercentage;
+        if($commissionPercentage >30 || $commissionPercentage<=0)
+        {
+            throw new \Exception("Vous ne pouvez pas avoir une commission inférieure ou égale à 0 ou supérieure à 30%");
+        }
     }
 
     public function getCommissionAmount()
@@ -32,4 +40,6 @@ class DonationFee
         $amount = $this->donation - $this->getCommissionAmount();
         return $amount;
     }
+
+
 }

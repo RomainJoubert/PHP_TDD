@@ -39,4 +39,25 @@ class DonationFeeTest extends TestCase
         $expected = 90;
         $this->assertEquals($expected, $actual);
     }
+//    public function testExceptionGetter()
+//    {
+//        $this->expectException(\Exception::class);
+//        $donationFees = new DonationFee(100, 10);
+//   }
+
+
+    public function testExceptionGetter()
+    {
+        //Etant donné qu'une commission doit être comprise entre 0 et 30%
+       $donationFees = new DonationFee(100, 40);
+
+        //Lorsqu'un don est versé
+        $actual = $donationFees->getCommissionAmount();
+
+        //Alors le pourcentage ne peut pas dépasser 30% et être inférieure ou égale à 0
+        $expected = 31;
+        $this->assertGreaterThan($actual, $expected);
+
+    }
+
 }

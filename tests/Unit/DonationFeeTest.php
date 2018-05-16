@@ -86,4 +86,17 @@ class DonationFeeTest extends TestCase
         $expected = 60;
         $this->assertEquals($actual, $expected);
     }
+
+    public function testMaximumCommissionAmountGetter()
+    {
+        //Etant donné que les commissions (fixes + variables) sont prélevées
+        $donationFees = new DonationFee(6000, 30);
+
+        //Lorsqu'on fait un don de plus de 4500
+        $actual = $donationFees->getMaximumCommissionAmount();
+
+        //Alors le montant maximum de la commission est limté à 500
+        $expected = 500;
+        $this->assertEquals($actual, $expected);
+    }
 }

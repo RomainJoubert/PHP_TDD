@@ -27,6 +27,10 @@ class DonationFee
         {
             throw new \Exception("Vous ne pouvez pas avoir une commission inférieure ou égale à 0 ou supérieure à 30%");
         }
+        if($donation <0 || $donation <100 || !is_int($donation /100))
+        {
+            throw new \Exception("Le montant de votre don n'est pas correct, ce doit être un entier supérieur ou égal à 1€");
+        }
     }
 
     public function getCommissionAmount()

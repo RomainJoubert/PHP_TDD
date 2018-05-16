@@ -39,25 +39,38 @@ class DonationFeeTest extends TestCase
         $expected = 90;
         $this->assertEquals($expected, $actual);
     }
-//    public function testExceptionGetter()
-//    {
-//        $this->expectException(\Exception::class);
-//        $donationFees = new DonationFee(100, 10);
-//   }
-
 
     public function testExceptionGetter()
     {
-        //Etant donné qu'une commission doit être comprise entre 0 et 30%
-       $donationFees = new DonationFee(100, 40);
+        $this->expectException(\Exception::class);
+        $donationFees = new DonationFee(100, 40);
+   }
 
-        //Lorsqu'un don est versé
-        $actual = $donationFees->getCommissionAmount();
 
-        //Alors le pourcentage ne peut pas dépasser 30% et être inférieure ou égale à 0
-        $expected = 31;
-        $this->assertGreaterThan($actual, $expected);
+//Autre méthode pour lever une exception mais cette fois, l'exception est rouge et non pas verte
 
+//    public function testExceptionGetter()
+//    {
+//        //Etant donné qu'une commission doit être comprise entre 0 et 30%
+//       $donationFees = new DonationFee(100, 31);
+//
+//        //Lorsqu'une commission est prélevée
+//        $actual = $donationFees->getCommissionAmount();
+//
+//        //Alors on retourne une exception
+//        $expected = 31;
+//        $this->assertGreaterThan($actual, $expected);
+//    }
+
+    public function testFeeAmountGetter()
+    {
+        //Etant donné qu'un don doit être un entier positif >=100
+        $this->expectException(\Exception::class);
+        $donationFees = new DonationFee(1550, 10);
+
+        //Lorsqu'un don est inférieur à 100 ou a des décimales ou est un négatif
+
+
+        //Alors il faut lever une exception
     }
-
 }

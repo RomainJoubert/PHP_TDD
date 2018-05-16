@@ -27,7 +27,7 @@ class DonationFee
         {
             throw new \Exception("Vous ne pouvez pas avoir une commission inférieure ou égale à 0 ou supérieure à 30%");
         }
-        if($donation <0 || $donation <100 || !is_int($donation /100))
+        if($donation <100 || !is_int($donation /100))
         {
             throw new \Exception("Le montant de votre don n'est pas correct, ce doit être un entier supérieur ou égal à 1€");
         }
@@ -35,7 +35,7 @@ class DonationFee
 
     public function getCommissionAmount()
     {
-        $commission = ($this->donation / 100) * $this->commissionPercentage;
+        $commission = (($this->donation / 100) * $this->commissionPercentage);
         return $commission;
     }
 
@@ -45,5 +45,10 @@ class DonationFee
         return $amount;
     }
 
+    public function getFixedAndCommissionFeeAmount()
+    {
+        $commission = (($this->donation / 100) * $this->commissionPercentage) + Commission::fixedFee;
+        return $commission;
+    }
 
 }

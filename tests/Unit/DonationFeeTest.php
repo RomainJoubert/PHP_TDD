@@ -66,11 +66,24 @@ class DonationFeeTest extends TestCase
     {
         //Etant donné qu'un don doit être un entier positif >=100
         $this->expectException(\Exception::class);
-        $donationFees = new DonationFee(1550, 10);
+        $donationFees = new DonationFee(1555.55, 10);
 
         //Lorsqu'un don est inférieur à 100 ou a des décimales ou est un négatif
 
 
         //Alors il faut lever une exception
+    }
+
+    public function testFixedAndCommissionFeedAmountGetter()
+    {
+        //Etant donné qu'un don de 100 doit être taxé de 10%
+        $donationFees = new DonationFee(100, 10);
+
+        //Lorsqu'on appelle getFixedAndCommissionFeeAmount()
+        $actual = $donationFees->getFixedAndCommissionFeeAmount();
+
+        //Alors la commission doit être égale aux frais fixes + 10%
+        $expected = 60;
+        $this->assertEquals($actual, $expected);
     }
 }

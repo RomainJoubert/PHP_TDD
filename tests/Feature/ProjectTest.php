@@ -18,4 +18,10 @@ class ProjectTest extends TestCase
     $reponse = $this->get('/project');
     $reponse->assertStatus(200);
     }
+
+    public function testTitre()
+    {
+        $reponse = $this ->get('/');
+        $reponse->assertSee("<h1>Liste des projets</h1>" );
+    }
 }

@@ -60,4 +60,17 @@ class DonationFee
         }
         return $commission;
     }
+
+    public function getSummary(){
+        $summary = array(
+            'donation' => $this->donation,
+            'fixedFee'=>Commission::fixedFee,
+            'commission'=>$this->getCommissionAmount(),
+            'fixedAndCommission'=>$this->getFixedAndCommissionFeeAmount(),
+            'amountCollected'=>$this->donation - $this->getFixedAndCommissionFeeAmount()
+        );
+            return $summary;
+
+    }
+
 }

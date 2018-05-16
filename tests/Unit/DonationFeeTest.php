@@ -44,7 +44,7 @@ class DonationFeeTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $donationFees = new DonationFee(100, 40);
-   }
+    }
 
 
 //Autre méthode pour lever une exception mais cette fois, l'exception est rouge et non pas verte
@@ -92,11 +92,33 @@ class DonationFeeTest extends TestCase
         //Etant donné que les commissions (fixes + variables) sont prélevées
         $donationFees = new DonationFee(6000, 30);
 
-        //Lorsqu'on fait un don de plus de 4500
+        //Lorsqu'on appelle getMaximumCommissionAmount(), quelque soit le montant
         $actual = $donationFees->getMaximumCommissionAmount();
 
         //Alors le montant maximum de la commission est limté à 500
         $expected = 500;
         $this->assertEquals($actual, $expected);
+    }
+
+    public function testSummaryArrayGetter()
+    {
+        $donationFees = new DonationFee(100, 10);
+        $actual = $donationFees->getSummary();
+
+        $this->assertArrayHasKey('donation', $actual);
+        $this->assertEquals(100, $actual['donation']);
+
+        $this->assertArrayHasKey('fixedFee', $actual);
+        $this->assertEquals(50, $actual['fixedFee']);
+
+        $this->assertArrayHasKey('commission', $actual);
+        $this->assertEquals(10, $actual['commission']);
+
+        $this->assertArrayHasKey('fixedAndCommission', $actual);
+        $this->assertEquals(60, $actual['fixedAndCommission']);
+
+        $this->assertArrayHasKey('amountCollected', $actual);
+        $this->assertEquals(40, $actual['amountCollected']);
+
     }
 }

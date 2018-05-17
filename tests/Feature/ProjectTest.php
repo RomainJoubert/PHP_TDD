@@ -9,7 +9,10 @@
 namespace Tests\Feature;
 
 
+use Faker\Factory;
+use phpDocumentor\Reflection\ProjectFactory;
 use Tests\TestCase;
+use App\Projet;
 
 class ProjectTest extends TestCase
 {
@@ -21,7 +24,15 @@ class ProjectTest extends TestCase
 
     public function testTitre()
     {
-        $reponse = $this ->get('/');
+        $reponse = $this ->get('/project');
         $reponse->assertSee("<h1>Liste des projets</h1>" );
+    }
+
+    public function testListOfProjects()
+    {
+        $project = factory(Projet::class)->create();
+        $reponse = $this->get('/project');
+        $reponse->assertSee($project->projectName);
+//        $this->assertDatabaseHas('projets', ['projectName'=>'Naomi Huel PhD']);
     }
 }

@@ -14,6 +14,7 @@
 {{--Date: 17/05/2018--}}
 {{--Time: 11:20--}}
 <h1>Détail du projet</h1>
+<h3>Nom du projet : {{$description->projectName}}</h3>
 
     <table>
         <tr>{{$description->descriptive}}</tr>

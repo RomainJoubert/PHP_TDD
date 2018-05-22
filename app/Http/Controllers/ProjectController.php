@@ -22,6 +22,6 @@ class ProjectController extends Controller
     public function detailDescriptive($id)
     {
         $description = Projet::find($id);
-        return view('descriptive', compact('description'));
+        return view('descriptive', compact('description', 'projectName'));
     }
 }

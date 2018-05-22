@@ -45,13 +45,23 @@ class ProjectTest extends TestCase
         $reponse->assertSee($project->projectName);
     }
 
-    //test pour vérifier qu'un titre apparait dans le détail d'un proje
+    //test pour vérifier qu'un titre apparait dans le détail d'un projet
     public function testTitleInDetail()
     {
         $project = factory(Projet::class)->create();
-        dd($project);
+//        dd($project);
         $reponse = $this->get('/project/'.$project->id);
         $reponse->assertSee($project->projectName);
     }
 
+    public function testRelation()
+    {
+        $project = factory(Projet::class)->create();
+        $actual = $project->user_id;
+        dump($actual);
+        $expected = $project->user->id;
+        dump($expected);
+        $this->assertEquals($expected, $actual);
+
+    }
 }

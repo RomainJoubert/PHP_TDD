@@ -8,6 +8,5 @@ $factory->define(App\Projet::class, function (Faker $faker) {
         'descriptive' => $faker->text,
         'authorName' => $faker->firstName,
         'created_at' =>$faker->dateTime,
-
     ];
 });

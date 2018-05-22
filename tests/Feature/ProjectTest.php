@@ -35,4 +35,9 @@ class ProjectTest extends TestCase
         $reponse->assertSee($project->projectName);
 //        $this->assertDatabaseHas('projets', ['projectName'=>'Naomi Huel PhD']);
     }
+    public function testTitleOfAProject()
+    {
+        $reponse = $this->get('/project');
+        $reponse->assertSee('Kovacek Inc');
+    }
 }

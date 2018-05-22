@@ -13,12 +13,12 @@
 {{--User: romain.joubert--}}
 {{--Date: 17/05/2018--}}
 {{--Time: 11:20--}}
-<h1>Liste des projets</h1>
-@foreach($projets as $projet)
+<h1>Détail du projet</h1>
+
     <table>
-        <tr><a href="/project/{{$projet->id}}">{{$projet->projectName}}</a></tr>
+        <tr>{{$description->descriptive}}</tr>
     </table>
-    @endforeach
+
 
 </body>
 </html>

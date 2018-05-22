@@ -25,3 +25,4 @@ Route::get('/project', function (){
 });
 
 Route::get('/project', 'ProjectController@titleList');
+Route::get('/project/{id}', 'ProjectController@detailDescriptive');

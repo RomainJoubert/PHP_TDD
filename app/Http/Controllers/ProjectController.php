@@ -15,7 +15,13 @@ class ProjectController extends Controller
 {
     public function titleList()
     {
-        $listOfTitle = Projet::SELECT('projectName')->get();
+        $listOfTitle = Projet::SELECT('id','projectName')->get();
         return view('/project', ['projets'=>$listOfTitle]);
+    }
+
+    public function detailDescriptive($id)
+    {
+        $description = Projet::find($id);
+        return view('descriptive', compact('description'));
     }
 }

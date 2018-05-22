@@ -26,3 +26,6 @@ Route::get('/project', function (){
 
 Route::get('/project', 'ProjectController@titleList');
 Route::get('/project/{id}', 'ProjectController@detailDescriptive');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

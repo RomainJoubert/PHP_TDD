@@ -64,4 +64,12 @@ class ProjectTest extends TestCase
         $this->assertEquals($expected, $actual);
 
     }
+
+    public function testNameOfAuthorInDetail()
+    {
+        $project = factory(Projet::class)->create();
+        $reponse = $this->get('/project/'.$project->id);
+        $reponse->assertSee($project->user->name);
+        dump($project->user->name);
+    }
 }

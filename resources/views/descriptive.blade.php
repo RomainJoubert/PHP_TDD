@@ -15,7 +15,7 @@
 {{--Time: 11:20--}}
 <h1>Détail du projet</h1>
 <h3>Nom du projet : {{$description->projectName}}</h3>
-<h3>Porteur du projet : {{$detail->name}}</h3>
+<h3>Porteur du projet : {{$detail->name}} et son id : {{$detail->id}}</h3>
 
     <table>
         <tr>{{$description->descriptive}}</tr>

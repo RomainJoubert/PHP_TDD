@@ -11,6 +11,10 @@
 |
 */
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,7 +29,11 @@ Route::get('/project', function (){
 });
 
 Route::get('/project', 'ProjectController@titleList');
-Route::get('/project/{id}', 'ProjectController@detailDescriptive');
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/project/{id}', 'ProjectController@detailDescriptive');
+
+//route pour créer un projet
+Route::get('/formulaire_projet', 'ProjectController@createProject')->middleware('auth');
+
+//route pour remplir et valider le formulaire
+Route::post('/project', 'ProjectController@storeProject')->middleware('auth');

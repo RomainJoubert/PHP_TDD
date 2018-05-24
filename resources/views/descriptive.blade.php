@@ -6,6 +6,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <title>Projet</title>
 </head>
 <body>
@@ -21,6 +23,12 @@
         <tr>{{$description->descriptive}}</tr>
     </table>
 
+<a href="/">
+    <button type="button" class="btn btn-primary">Menu</button>
+</a>
 
+<a href="/formulaire_projet">
+    <button type="button" class="btn btn-success">Créer un projet</button>
+</a>
 </body>
 </html>

@@ -86,18 +86,19 @@ class ProjectTest extends TestCase
     {
         //Etant donné que je crée un utilisateur connecté
         $user = factory(User::class)->create();
+        $project = factory(Projet::class)->make();
         $this->actingAs($user)
             ->get('/formulaire_projet')
             ->assertSee($user->name);
 
         //Lorsque je remplis et valide un formulaire
-        $project = ['projectName' => 'Test',
-            'descriptive' => 'Encore un test'];
-        $this->post('/project', $project);
+        $memory = ['projectName' => $project->projectName,
+            'descriptive' => $project->descriptive];
+        $this->post('/project', $memory);
 
         //Alors son projet est créée
         $reponse = $this->get('/project');
-        $reponse->assertSee('Test');
+        $reponse->assertSee($project->projectName);
     }
 
     public function testUnconnectedUserCantAddProject()
@@ -113,8 +114,22 @@ class ProjectTest extends TestCase
         //Etant donné qu'un utilisateur non connecté va sur le site
         //Lorsqu'il essaie de créer un projet, on attend une exception
         $expected = $this->expectException(AuthenticationException::class);
-        $reponse = $this->get('/formulaire_projet');
         //Alors il est redirigé sur la page de connexion
-//        $reponse->assertTrue($expected);
+        $reponse = $this->get('/formulaire_projet');
+
+    }
+
+    public function testOnlyAuthorCanEditProject()
+    {
+        //Etant donné qu'un utilisateur connecté va sur un projet
+        $project = factory(Projet::class)->create();
+        $user = factory(User::class)->create();
+
+        //Lorsqu'il essaie de modifier un projet qui n'est pas le sien
+        $this->actingAs($user);
+        $reponse = $this->get('/modification/' . $project->id);
+
+        //Alors il a un message d'erreur qui s'affiche
+        $reponse->assertSee("Vous n'êtes pas l'auteur du projet, vous ne pouvez pas le modifier");
     }
 }

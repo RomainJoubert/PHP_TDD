@@ -17,15 +17,15 @@ class ProjectController extends Controller
 {
     public function titleList()
     {
-        $listOfTitle = Projet::SELECT('id','projectName')->get();
-        return view('/project', ['projets'=>$listOfTitle]);
+        $listOfTitle = Projet::SELECT('id', 'projectName')->get();
+        return view('/project', ['projets' => $listOfTitle]);
     }
 
     public function detailDescriptive($id)
     {
         $description = Projet::find($id);
         $detail = $description->user->find($description->user_id);
-        return view('descriptive', compact('description','detail'));
+        return view('descriptive', compact('description', 'detail'));
     }
 
     public function createProject()
@@ -40,6 +40,21 @@ class ProjectController extends Controller
         $newProject->descriptive = $request->descriptive;
         $newProject->user_id = Auth::user()->id;
         $newProject->save();
+        return redirect('/project');
+    }
+
+    public function editProject($id)
+    {
+        $project = Projet::find($id);
+        return view('/modification', compact('project'));
+    }
+
+    public function updateProject($id)
+    {
+        $project = Projet::find($id);
+        $project->projectName = request('newProjectName');
+        $project->descriptive = request('newDescriptive');
+        $project->save();
         return redirect('/project');
     }
 }

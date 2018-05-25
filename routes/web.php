@@ -37,3 +37,9 @@ Route::get('/formulaire_projet', 'ProjectController@createProject')->middleware(
 
 //route pour remplir et valider le formulaire
 Route::post('/project', 'ProjectController@storeProject')->middleware('auth');
+
+//route pour modifier un projet
+Route::get('/modification/{id}', 'ProjectController@editProject')->middleware('auth');
+
+Route::put('/project/{id}', 'ProjectController@updateProject')->middleware('auth');
+

@@ -1,19 +1,10 @@
-<!<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <title>Création projet</title>
-</head>
-<body>
+@extends('layouts.app')
+@section('content')
 
 <div class="container">
     <h3>Bonjour <b>{{Auth::user()->name}}</b></h3>
     <hr>
-    <form class="" action="/project" method="get">
+    <form class="" action="/project" method="post">
         {{csrf_field()}}
         <div class="form-group">
             <label for="projectName">Nom du Projet</label>
@@ -36,7 +27,6 @@
     </form>
     <img src="/img/vacances.jpg">
 </div>
-</body>
-</html>
+@endsection
 
 
